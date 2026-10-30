@@ -35,6 +35,11 @@ export async function GET(request: Request) {
 
   const absoluteApkUrl = `${origin}${CURRENT_APP_RELEASE.apkDownloadPath}`;
   const directApkUrl = `${origin}${CURRENT_APP_RELEASE.apkDirectPath}`;
+  const isLocalHost = origin.includes('localhost') || origin.includes('127.0.0.1') || origin.includes('resq-kerala.org');
+  // For phone QR scanners, always prefer the public CDN URL if the local origin isn't globally reachable
+  const recommendedQrUrl = isLocalHost
+    ? CURRENT_APP_RELEASE.publicDownloadUrl
+    : absoluteApkUrl;
 
   return NextResponse.json({
     ...CURRENT_APP_RELEASE,
@@ -43,6 +48,9 @@ export async function GET(request: Request) {
     fileExistsOnServer: fileExists,
     downloadUrl: absoluteApkUrl,
     directUrl: directApkUrl,
-    qrEncodedUrl: absoluteApkUrl,
+    qrEncodedUrl: recommendedQrUrl,
+    publicDownloadUrl: CURRENT_APP_RELEASE.publicDownloadUrl,
+    publicReleasePageUrl: CURRENT_APP_RELEASE.publicReleasePageUrl,
+    publicRepoUrl: CURRENT_APP_RELEASE.publicRepoUrl,
   });
 }

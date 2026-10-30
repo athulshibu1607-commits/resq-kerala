@@ -16,6 +16,9 @@ export interface AppReleaseMetadata {
   isPublished: boolean;
   sha256Checksum?: string;
   permissions: string[];
+  publicDownloadUrl: string;
+  publicReleasePageUrl: string;
+  publicRepoUrl: string;
 }
 
 export const CURRENT_APP_RELEASE: AppReleaseMetadata = {
@@ -35,6 +38,9 @@ export const CURRENT_APP_RELEASE: AppReleaseMetadata = {
   debugApkPath: '/downloads/resq-kerala-v1.0.0-debug.apk',
   isPublished: true,
   sha256Checksum: '2c07ff86d8aef41d892d11de74da56898442d14ad1d18f54d816e5e34c581f72',
+  publicDownloadUrl: 'https://github.com/athulshibu1607-commits/resq-kerala/releases/download/v1.0.0/resq-kerala-v1.0.0.apk',
+  publicReleasePageUrl: 'https://github.com/athulshibu1607-commits/resq-kerala/releases/tag/v1.0.0',
+  publicRepoUrl: 'https://github.com/athulshibu1607-commits/resq-kerala',
   permissions: [
     'android.permission.INTERNET',
     'android.permission.ACCESS_NETWORK_STATE',

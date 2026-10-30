@@ -10,12 +10,37 @@ export default function InstallPage() {
   const [release, setRelease] = useState<AppReleaseMetadata>(CURRENT_APP_RELEASE);
   const [apkPublished, setApkPublished] = useState<boolean>(true);
   const [qrSvg, setQrSvg] = useState<string>('');
-  const [apkDownloadUrl, setApkDownloadUrl] = useState<string>('');
+  const [apkDownloadUrl, setApkDownloadUrl] = useState<string>(CURRENT_APP_RELEASE.publicDownloadUrl);
+  const [qrMode, setQrMode] = useState<'direct' | 'website'>('direct');
   const [siteUrl, setSiteUrl] = useState<string>('');
   const [activePlatform, setActivePlatform] = useState<'android' | 'ios' | 'desktop'>('android');
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showFailureHelp, setShowFailureHelp] = useState<boolean>(false);
+
+  // Helper to re-generate QR code based on selected target URL
+  const updateQrCode = (url: string) => {
+    QRCode.toString(url, {
+      type: 'svg',
+      margin: 1,
+      errorCorrectionLevel: 'M',
+      color: {
+        dark: '#0A192F',
+        light: '#FFFFFF',
+      },
+    })
+      .then((svg) => setQrSvg(svg))
+      .catch((err) => {
+        console.warn('QR SVG fallback:', err);
+        QRCode.toDataURL(url, {
+          width: 240,
+          margin: 1,
+          color: { dark: '#0A192F', light: '#FFFFFF' },
+        }).then((dataUrl) => {
+          setQrSvg(`<img src="${dataUrl}" alt="APK QR Code" class="w-full h-full object-contain" />`);
+        });
+      });
+  };
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -40,54 +65,44 @@ export default function InstallPage() {
     const origin = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
     setSiteUrl(origin);
 
+    // Initial QR render with verified direct APK download link
+    const initialUrl = qrMode === 'direct'
+      ? CURRENT_APP_RELEASE.publicDownloadUrl
+      : CURRENT_APP_RELEASE.publicReleasePageUrl;
+    setApkDownloadUrl(initialUrl);
+    updateQrCode(initialUrl);
+
     // Fetch live release metadata from /api/release
     fetch('/api/release')
       .then((res) => {
         if (!res.ok) throw new Error('Failed to load release metadata');
         return res.json();
       })
-      .then((data: AppReleaseMetadata & { fileExistsOnServer?: boolean; downloadUrl?: string }) => {
+      .then((data: AppReleaseMetadata & { fileExistsOnServer?: boolean; downloadUrl?: string; qrEncodedUrl?: string }) => {
         setRelease(data);
         const isPublished = data.isPublished && data.fileExistsOnServer !== false;
         setApkPublished(isPublished);
 
-        const targetUrl = data.downloadUrl || `${origin}${data.apkDownloadPath}`;
-        setApkDownloadUrl(targetUrl);
-
-        if (isPublished) {
-          // Generate real QR code for the genuine APK download URL
-          QRCode.toString(targetUrl, {
-            type: 'svg',
-            margin: 1,
-            color: {
-              dark: '#0A192F',
-              light: '#FFFFFF',
-            },
-          })
-            .then((svg) => setQrSvg(svg))
-            .catch((err) => {
-              console.warn('QR SVG fallback:', err);
-              QRCode.toDataURL(targetUrl, {
-                width: 240,
-                margin: 1,
-                color: { dark: '#0A192F', light: '#FFFFFF' },
-              }).then((url) => {
-                setQrSvg(`<img src="${url}" alt="APK Download QR Code" class="w-full h-full object-contain" />`);
-              });
-            });
-        }
+        const target = qrMode === 'direct'
+          ? (data.publicDownloadUrl || CURRENT_APP_RELEASE.publicDownloadUrl)
+          : (data.publicReleasePageUrl || CURRENT_APP_RELEASE.publicReleasePageUrl);
+        setApkDownloadUrl(target);
+        updateQrCode(target);
       })
       .catch((err) => {
         console.warn('Could not reach release API, using static metadata:', err);
-        const fallbackTarget = `${origin}${CURRENT_APP_RELEASE.apkDownloadPath}`;
-        setApkDownloadUrl(fallbackTarget);
-        QRCode.toString(fallbackTarget, {
-          type: 'svg',
-          margin: 1,
-          color: { dark: '#0A192F', light: '#FFFFFF' },
-        }).then((svg) => setQrSvg(svg));
       });
   }, []);
+
+  // Handle switching between Auto-Download and Website QR modes
+  const handleQrModeChange = (mode: 'direct' | 'website') => {
+    setQrMode(mode);
+    const targetUrl = mode === 'direct'
+      ? (release.publicDownloadUrl || CURRENT_APP_RELEASE.publicDownloadUrl)
+      : (release.publicReleasePageUrl || CURRENT_APP_RELEASE.publicReleasePageUrl);
+    setApkDownloadUrl(targetUrl);
+    updateQrCode(targetUrl);
+  };
 
   const handleCopyApkUrl = async () => {
     if (!apkDownloadUrl) return;
@@ -234,7 +249,7 @@ export default function InstallPage() {
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 {apkPublished ? (
                   <a
-                    href={release.apkDownloadPath}
+                    href={release.publicDownloadUrl || release.apkDownloadPath}
                     download="resq-kerala-v1.0.0.apk"
                     className="inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-secondary hover:bg-red-700 text-white font-black text-sm shadow-md transition-all text-center"
                     id="btn-download-apk"
@@ -250,6 +265,17 @@ export default function InstallPage() {
                   </div>
                 )}
 
+                <a
+                  href={release.publicReleasePageUrl || CURRENT_APP_RELEASE.publicReleasePageUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl bg-surface-container dark:bg-command-navy hover:bg-surface-container-high text-on-surface dark:text-white text-xs font-bold transition-colors"
+                  id="btn-open-release-page"
+                >
+                  <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+                  <span>Release Webpage</span>
+                </a>
+
                 <button
                   type="button"
                   onClick={handleCopyApkUrl}
@@ -259,7 +285,7 @@ export default function InstallPage() {
                   <span className="material-symbols-outlined text-[16px]">
                     {copiedLink ? 'check' : 'content_copy'}
                   </span>
-                  <span>{copiedLink ? 'Link Copied!' : 'Copy Download Link'}</span>
+                  <span>{copiedLink ? 'Link Copied!' : 'Copy Link'}</span>
                 </button>
               </div>
 
@@ -295,18 +321,25 @@ export default function InstallPage() {
                     </p>
                     <div className="flex flex-wrap gap-2">
                       <a
+                        href={release.publicDownloadUrl}
+                        download="resq-kerala-v1.0.0.apk"
+                        className="px-3 py-1.5 rounded-lg bg-secondary text-white font-bold text-xs shadow-sm hover:bg-red-700 transition-colors"
+                      >
+                        Global CDN Mirror: GitHub Release Asset
+                      </a>
+                      <a
+                        href="/downloads/resq-kerala-v1.0.0.apk"
+                        download="resq-kerala-v1.0.0.apk"
+                        className="px-3 py-1.5 rounded-lg bg-surface-container-high dark:bg-command-card text-on-surface dark:text-white font-bold text-xs hover:bg-secondary hover:text-white transition-colors"
+                      >
+                        Local Host Mirror: /downloads/resq-kerala-v1.0.0.apk
+                      </a>
+                      <a
                         href="/resq-kerala.apk"
                         download="resq-kerala.apk"
                         className="px-3 py-1.5 rounded-lg bg-surface-container-high dark:bg-command-card text-on-surface dark:text-white font-bold text-xs hover:bg-secondary hover:text-white transition-colors"
                       >
-                        Mirror 1: /resq-kerala.apk
-                      </a>
-                      <a
-                        href="/downloads/resq-kerala-v1.0.0-debug.apk"
-                        download="resq-kerala-v1.0.0-debug.apk"
-                        className="px-3 py-1.5 rounded-lg bg-surface-container-high dark:bg-command-card text-on-surface dark:text-white font-bold text-xs hover:bg-secondary hover:text-white transition-colors"
-                      >
-                        Debug Build (Testing): /downloads/resq-kerala-v1.0.0-debug.apk
+                        Root Mirror: /resq-kerala.apk
                       </a>
                     </div>
                   </div>
@@ -315,28 +348,64 @@ export default function InstallPage() {
             </div>
           </div>
 
-          {/* Right: Real Verified QR Code Card */}
-          <div className="lg:col-span-5 bg-white dark:bg-command-card rounded-3xl p-6 sm:p-8 shadow-sm border border-surface-container-high dark:border-command-border flex flex-col items-center justify-between text-center">
-            <div>
-              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold mb-2">
-                <span className="material-symbols-outlined text-[14px]">qr_code_scanner</span>
-                <span>Scan with Android Camera</span>
+          {/* Right: Real Verified Custom QR Code Card */}
+          <div className="lg:col-span-5 bg-white dark:bg-command-card rounded-3xl p-6 sm:p-8 shadow-sm border border-surface-container-high dark:border-command-border flex flex-col items-center justify-between text-center relative overflow-hidden">
+            {/* Custom Mode Switcher */}
+            <div className="w-full mb-3">
+              <div className="inline-flex p-1 bg-surface-container dark:bg-command-navy rounded-xl w-full text-xs font-bold mb-3">
+                <button
+                  type="button"
+                  onClick={() => handleQrModeChange('direct')}
+                  className={`flex-1 py-1.5 px-2.5 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+                    qrMode === 'direct'
+                      ? 'bg-secondary text-white shadow-sm'
+                      : 'text-on-surface-variant dark:text-command-subtle hover:text-on-surface'
+                  }`}
+                  id="tab-qr-direct"
+                >
+                  <span className="material-symbols-outlined text-[15px]">download</span>
+                  <span>Auto-Download APK</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleQrModeChange('website')}
+                  className={`flex-1 py-1.5 px-2.5 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+                    qrMode === 'website'
+                      ? 'bg-secondary text-white shadow-sm'
+                      : 'text-on-surface-variant dark:text-command-subtle hover:text-on-surface'
+                  }`}
+                  id="tab-qr-website"
+                >
+                  <span className="material-symbols-outlined text-[15px]">language</span>
+                  <span>Release Webpage</span>
+                </button>
               </div>
+
               <h3 className="font-headline text-lg font-bold text-on-surface dark:text-white">
-                Scan to Download APK Directly
+                {qrMode === 'direct' ? 'Scan to Download APK Automatically' : 'Scan to Open Release Webpage'}
               </h3>
-              <p className="text-xs text-on-surface-variant dark:text-command-subtle mt-1 mb-4">
-                Point your phone camera to download the verified .apk package straight to your Android device
+              <p className="text-xs text-on-surface-variant dark:text-command-subtle mt-1 leading-relaxed">
+                {qrMode === 'direct'
+                  ? 'Scan with any smartphone camera to immediately trigger the APK download without extra clicks.'
+                  : 'Scan with any device camera to open the official release website and verify release checksums.'}
               </p>
             </div>
 
+            {/* QR Code Container */}
             <div className="my-auto py-2">
               {apkPublished && qrSvg ? (
-                <div
-                  className="p-3.5 bg-white rounded-2xl border-2 border-slate-200 shadow-md w-56 h-56 mx-auto flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>img]:w-full [&>img]:h-full"
-                  dangerouslySetInnerHTML={{ __html: qrSvg }}
-                  id="apk-qr-container"
-                />
+                <div className="relative group">
+                  <div
+                    className="p-3.5 bg-white rounded-2xl border-2 border-slate-200 shadow-md w-56 h-56 mx-auto flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>img]:w-full [&>img]:h-full"
+                    dangerouslySetInnerHTML={{ __html: qrSvg }}
+                    id="apk-qr-container"
+                  />
+                  <div className="absolute inset-0 bg-slate-900/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                    <span className="px-3 py-1 rounded-full bg-slate-900/80 text-white text-[11px] font-bold">
+                      Scan with Phone Camera
+                    </span>
+                  </div>
+                </div>
               ) : !apkPublished ? (
                 <div className="w-56 h-56 bg-surface-container-low dark:bg-command-navy rounded-2xl flex flex-col items-center justify-center text-xs text-amber-500 gap-2 border border-dashed border-amber-400 p-4">
                   <span className="material-symbols-outlined text-[32px]">pending</span>
@@ -348,24 +417,22 @@ export default function InstallPage() {
               ) : (
                 <div className="w-56 h-56 bg-surface-container-low dark:bg-command-navy rounded-2xl flex flex-col items-center justify-center text-xs text-slate-400 gap-2 border border-surface-container-high dark:border-command-border">
                   <span className="material-symbols-outlined text-[32px] animate-spin">refresh</span>
-                  <span>Encoding APK download URL...</span>
+                  <span>Encoding QR code...</span>
                 </div>
               )}
             </div>
 
-            <div className="w-full pt-4">
-              <span className="text-[11px] font-mono text-on-surface-variant dark:text-command-subtle block mb-1.5 text-left font-bold">
-                Encoded APK URL:
-              </span>
+            {/* Encoded URL & Quick Actions */}
+            <div className="w-full pt-3 space-y-2.5">
               <div className="flex items-center justify-between gap-2 p-2 bg-surface-container-low dark:bg-command-navy rounded-xl border border-surface-container-high dark:border-command-border text-left">
                 <span className="font-mono text-[11px] text-on-surface-variant dark:text-command-subtle truncate flex-1 pl-1" title={apkDownloadUrl}>
-                  {apkDownloadUrl || `${siteUrl}/downloads/resq-kerala-v1.0.0.apk`}
+                  {apkDownloadUrl}
                 </span>
                 <button
                   type="button"
                   onClick={handleCopyApkUrl}
                   className="px-2.5 py-1 rounded-lg bg-surface-container dark:bg-command-card text-on-surface dark:text-white text-[11px] font-bold hover:bg-surface-container-high transition-colors flex items-center gap-1 shrink-0"
-                  title="Copy APK URL"
+                  title="Copy Link"
                 >
                   <span className="material-symbols-outlined text-[13px]">
                     {copiedLink ? 'check' : 'content_copy'}
@@ -373,9 +440,36 @@ export default function InstallPage() {
                   <span>{copiedLink ? 'Copied' : 'Copy'}</span>
                 </button>
               </div>
-              <div className="flex items-center justify-between text-[10px] text-slate-400 mt-2 px-1">
-                <span>SHA-256 Verified</span>
-                <span>Target: Android 14 (API 34)</span>
+
+              {/* Action shortcuts: Test Link & Download QR image */}
+              <div className="flex items-center justify-center gap-2">
+                <a
+                  href={apkDownloadUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold px-3 py-1.5 rounded-lg bg-surface-container dark:bg-command-navy hover:bg-surface-container-high text-on-surface dark:text-white transition-colors"
+                  id="btn-test-qr-link"
+                >
+                  <span className="material-symbols-outlined text-[13px]">open_in_new</span>
+                  <span>Test Link in New Tab</span>
+                </a>
+                <a
+                  href={qrMode === 'direct' ? '/downloads/qr-apk-direct.png' : '/downloads/qr-apk-website.png'}
+                  download={qrMode === 'direct' ? 'resq-kerala-apk-qr.png' : 'resq-kerala-website-qr.png'}
+                  className="inline-flex items-center gap-1 text-[11px] font-bold px-3 py-1.5 rounded-lg bg-surface-container dark:bg-command-navy hover:bg-surface-container-high text-on-surface dark:text-white transition-colors"
+                  id="btn-download-qr-image"
+                >
+                  <span className="material-symbols-outlined text-[13px]">image</span>
+                  <span>Save QR (.png)</span>
+                </a>
+              </div>
+
+              <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1 px-1">
+                <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  <span>Global High-Speed CDN</span>
+                </span>
+                <span>SHA-256 Verified · 3.3 MB</span>
               </div>
             </div>
           </div>
