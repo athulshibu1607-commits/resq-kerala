@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-tint": "#515f78", "on-primary-fixed": "#0d1c32", "tertiary-container": "#002109", "surface-container-low": "#eff4ff", "on-tertiary-container": "#009842", "surface-container-highest": "#d3e4fe", "on-secondary-container": "#fffbff", "tertiary-fixed": "#7ffc97", "on-tertiary-fixed-variant": "#005320", "secondary-fixed": "#ffdad6", "outline": "#75777e", "on-surface": "#0b1c30", "outline-variant": "#c5c6cd", "primary-fixed": "#d6e3ff", "tertiary": "#000000", "error": "#ba1a1a", "surface-container": "#e5eeff", "on-primary": "#ffffff", "on-tertiary": "#ffffff", "surface-bright": "#f8f9ff", "primary-container": "#0d1c32", "surface": "#f8f9ff", "on-error-container": "#93000a", "error-container": "#ffdad6", "on-surface-variant": "#44474d", "on-primary-fixed-variant": "#39475f", "on-secondary-fixed-variant": "#93000b", "secondary-fixed-dim": "#ffb4ab", "surface-container-lowest": "#ffffff", "on-tertiary-fixed": "#002109", "inverse-surface": "#213145", "secondary": "#bb0112", "on-primary-container": "#76849f", "background": "#f8f9ff", "primary": "#000000", "surface-variant": "#d3e4fe", "inverse-on-surface": "#eaf1ff", "on-error": "#ffffff", "secondary-container": "#e02928", "primary-fixed-dim": "#b9c7e4", "on-secondary-fixed": "#410002", "surface-dim": "#cbdbf5", "inverse-primary": "#b9c7e4", "tertiary-fixed-dim": "#62df7d", "on-secondary": "#ffffff", "on-background": "#0b1c30", "surface-container-high": "#dce9ff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "margin": "1rem", "gutter-lg": "2rem", "space-sm": "0.5rem", "space-md": "1rem", "space-xl": "2.5rem", "space-lg": "1.5rem", "margin-lg": "3rem", "margin-md": "2rem", "gutter": "1rem", "gutter-md": "1.5rem" }, "fontFamily": { "body-md": ["Inter"], "headline-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-sm": ["Inter"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-md": ["Inter"], "label-lg": ["Inter"], "body-lg": ["Inter"], "label-sm": ["Inter"] }, "fontSize": { "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-xl-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "800" }], "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "500" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;min-height:100vh;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Go Back" class="w-11 h-11 flex items-center justify-center text-on-surface rounded-lg active:bg-surface-container" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="RESQ KERALA Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UXCfhDEmR75OoICw-SZRBFhPhqLY4L0VNYgnmSeo5YxOiTqjyIqRLhFsbS76LhJjn5c3o3T9egdK4ny4L4gReOk9__sGOTIZcGhuCvAH9aRrVwut1zWIPYm3B-Yvz6WaG5uWkePI9pOUFL3QR19GGxLwBH61qQ8MkC1juSh_pj3vcJW1Qx70gUqbkJDzu5VbUIF_N7_U26f6hBWuRKfcPtrwOl72EeMK3JCI_wb-w"/><div class="flex flex-col"><h1 class="font-headline-sm text-headline-sm text-on-surface leading-tight">Sos Dispatch</h1><span class="font-label-sm text-label-sm text-on-surface-variant leading-none">RESQ KERALA Network</span></div></div><div class="flex items-center gap-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-safe bg-surface min-h-screen px-margin"><div class="flex flex-col w-full gap-space-md pb-space-xl">
+<div class="w-full bg-secondary text-on-secondary px-space-md py-space-sm rounded-lg flex items-center gap-space-sm shadow-md">
+<span class="material-symbols-outlined shrink-0 text-[20px]" style="font-variation-settings: 'FILL' 1;">warning</span>
+<p class="font-label-sm text-label-sm leading-snug flex-1 font-semibold">
+      SIMULATION ONLY: Academic hackathon prototype. In a real life emergency, dial 112 immediately.
+    </p>
+</div>
+<div class="flex items-center justify-between bg-surface-container px-space-md py-space-sm rounded-lg">
+<div class="flex items-center gap-space-xs">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">അടിയന്തര രക്ഷാസന്ദേശം</span>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-highest px-space-sm py-0.5 rounded-full text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">cell_tower</span>
+<span>Mesh Sync Online</span>
+</div>
+</div>
+<div class="relative flex flex-col items-center justify-center py-space-md">
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-56 h-56 rounded-full bg-secondary-container/20 animate-ping" id="pulse-ring-1"></div>
+</div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-44 h-44 rounded-full bg-secondary/15 animate-pulse" id="pulse-ring-2"></div>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="relative w-48 h-48 select-none">
+<svg class="absolute inset-0 w-full h-full -rotate-90" viewbox="0 0 100 100">
+<circle class="stroke-surface-container fill-none" cx="50" cy="50" r="46" stroke-width="7"></circle>
+<circle class="stroke-secondary fill-none transition-all duration-75" cx="50" cy="50" id="sos-progress-ring" r="46" stroke-dasharray="289" stroke-dashoffset="289" stroke-linecap="round" stroke-width="7"></circle>
+</svg>
+<button class="absolute inset-2.5 rounded-full bg-secondary active:scale-95 transition-transform flex flex-col items-center justify-center text-on-secondary shadow-xl focus:outline-none cursor-pointer overflow-hidden group" id="sos-main-btn">
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/20 pointer-events-none"></div>
+<span class="material-symbols-outlined text-[44px] animate-bounce mb-1" style="font-variation-settings: 'FILL' 1;">emergency_heat</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold tracking-tight">SOS</span>
+<span class="font-label-sm text-label-sm text-on-secondary/90 font-medium">അടിയന്തിരം</span>
+</button>
+</div>
+<div class="mt-space-sm flex flex-col items-center text-center">
+<div class="flex items-center gap-1 font-label-md text-label-md text-secondary font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">touch_app</span>
+<span id="sos-instruction-label">Hold for 3s to Transmit</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Dual-band rescue packet auto-broadcasts</p>
+</div>
+</div>
+</div>
+<div class="w-full bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-sm shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">my_location</span>
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Auto-Detected Telemetry</span>
+</div>
+<button class="flex items-center gap-1 px-space-sm py-1 bg-surface-container rounded-lg text-on-surface font-label-sm text-label-sm active:bg-surface-container-highest transition-colors" id="copy-telemetry-btn">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span id="copy-btn-text">Copy GPS</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col gap-1 shadow-sm">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>Live GPS Coordinates (WGS84)</span>
+<span class="text-on-tertiary-container font-semibold">High Accuracy (±3m)</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-mono tracking-tight font-bold">
+        9.9312° N, 76.2673° E
+      </div>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">pin_drop</span>
+<span class="font-medium">Near Aluva Manappuram Bridge, Ernakulam District</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm mt-1">
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex items-center gap-space-xs shadow-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[20px]">battery_charging_80</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Battery Status</span>
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">84% (Good)</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex items-center gap-space-xs shadow-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Network Carrier</span>
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">Mesh + Cellular</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-lg text-label-lg text-on-surface font-bold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">crisis_alert</span>
+        Emergency Situation / സാഹചര്യം
+      </label>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Select all that apply</span>
+</div>
+<div class="flex flex-wrap gap-2 pt-1" id="situation-chips-container">
+<button class="situation-chip px-space-sm py-2 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md text-left transition-all active:scale-95 flex items-center gap-1.5" data-selected="false" type="button">
+<span class="material-symbols-outlined text-[16px]">roofing</span>
+<span>Trapped on Rooftop / Upper Floor</span>
+</button>
+<button class="situation-chip px-space-sm py-2 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md text-left transition-all active:scale-95 flex items-center gap-1.5" data-selected="false" type="button">
+<span class="material-symbols-outlined text-[16px]">waves</span>
+<span>Rising Water Inside House (&gt;4 ft)</span>
+</button>
+<button class="situation-chip px-space-sm py-2 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md text-left transition-all active:scale-95 flex items-center gap-1.5" data-selected="true" type="button">
+<span class="material-symbols-outlined text-[16px]">accessible</span>
+<span>Injured / Elderly / Infant with Us</span>
+</button>
+<button class="situation-chip px-space-sm py-2 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md text-left transition-all active:scale-95 flex items-center gap-1.5" data-selected="false" type="button">
+<span class="material-symbols-outlined text-[16px]">landslide</span>
+<span>Landslide Debris Blocked Exit</span>
+</button>
+<button class="situation-chip px-space-sm py-2 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md text-left transition-all active:scale-95 flex items-center gap-1.5" data-selected="false" type="button">
+<span class="material-symbols-outlined text-[16px]">medication</span>
+<span>Food / Insulin Running Out</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-center justify-between shadow-sm">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Stranded Individuals</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">ആളുകളുടെ എണ്ണം (മുതിർന്നവർ / കുട്ടികൾ)</span>
+</div>
+<div class="flex items-center gap-space-sm bg-surface-container-lowest px-space-sm py-1.5 rounded-lg shadow-sm">
+<button aria-label="Decrease persons count" class="w-9 h-9 rounded-lg bg-surface-container text-on-surface flex items-center justify-center active:bg-surface-container-highest transition-colors font-bold" id="decrement-count">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<div class="w-20 text-center">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold" id="stranded-count-display">4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block -mt-1">Persons</span>
+</div>
+<button aria-label="Increase persons count" class="w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center active:bg-on-primary-fixed-variant transition-colors font-bold" id="increment-count">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-on-surface font-bold flex items-center justify-between" for="sos-notes">
+<span>Additional Notes / പ്രത്യേക ആവശ്യങ്ങൾ</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">Optional</span>
+</label>
+<div class="relative">
+<textarea class="w-full bg-surface-container-lowest rounded-xl p-space-sm text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-0 shadow-sm resize-none" id="sos-notes" placeholder="E.g., 2 senior citizens, need boat evacuation, floor level 2..." rows="2">2 senior citizens, need boat evacuation</textarea>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest p-space-md rounded-xl flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-11 h-11 rounded-lg bg-surface-container flex items-center justify-center text-on-surface transition-colors" id="siren-icon-box">
+<span class="material-symbols-outlined text-[24px]">volume_up</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Loud Audio Beacon / Whistle</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Continuous pitch for acoustic debris search</span>
+</div>
+</div>
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md font-bold transition-all active:scale-95 shadow-sm" id="toggle-siren-btn">
+      OFF
+    </button>
+</div>
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<button class="w-full h-14 bg-secondary text-on-secondary rounded-xl font-label-lg text-label-lg font-bold flex items-center justify-center gap-space-xs shadow-lg active:scale-[0.98] transition-transform" id="instant-dispatch-btn">
+<span class="material-symbols-outlined text-[22px]">send</span>
+<span>Transmit SOS with Live GPS (Simulation)</span>
+</button>
+<button class="w-full h-12 bg-primary-container text-on-primary rounded-xl font-label-lg text-label-lg font-semibold flex items-center justify-center gap-space-xs shadow-sm active:bg-primary transition-colors" id="sms-fallback-btn">
+<span class="material-symbols-outlined text-[20px]">sms</span>
+<span>Send Emergency SMS Broadcast (No Internet)</span>
+</button>
+</div>
+<div class="fixed bottom-6 left-margin right-margin bg-primary text-on-primary px-space-md py-space-sm rounded-lg shadow-2xl flex items-center gap-space-sm translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-50" id="toast-notification">
+<span class="material-symbols-outlined text-tertiary-fixed text-[22px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md" id="toast-message">SOS simulated alert dispatched successfully!</span>
+</div>
+</div>
+<script>
+  (function initSOSEmergency() {
+    let holdTimer = null;
+    let holdProgress = 0;
+    const progressRing = document.getElementById('sos-progress-ring');
+    const instructionLabel = document.getElementById('sos-instruction-label');
+    const mainBtn = document.getElementById('sos-main-btn');
+    const totalCircumference = 289;
+
+    function setRingProgress(percent) {
+      const offset = totalCircumference - (percent / 100) * totalCircumference;
+      if (progressRing) {
+        progressRing.style.strokeDashoffset = offset;
+      }
+    }
+
+    function triggerSOSDispatch(channel) {
+      showToast(channel === 'sms' ? 'SIMULATION: Emergency SMS queued via cellular mesh.' : 'SIMULATION: Rescue payload dispatched to Aluva EOC!');
+      if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
+    }
+
+    function startHolding(e) {
+      if (e.cancelable && e.type !== 'mousedown') e.preventDefault();
+      holdProgress = 0;
+      setRingProgress(0);
+      instructionLabel.textContent = "Hold firmly... Transmitting";
+      
+      const stepInterval = 30;
+      const totalTime = 3000;
+      const stepIncrement = (stepInterval / totalTime) * 100;
+
+      holdTimer = setInterval(() => {
+        holdProgress += stepIncrement;
+        if (holdProgress >= 100) {
+          clearInterval(holdTimer);
+          holdTimer = null;
+          setRingProgress(100);
+          instructionLabel.textContent = "SOS Transmitted!";
+          triggerSOSDispatch('live');
+          setTimeout(() => {
+            setRingProgress(0);
+            instructionLabel.textContent = "Hold for 3s to Transmit";
+          }, 2500);
+        } else {
+          setRingProgress(holdProgress);
+        }
+      }, stepInterval);
+    }
+
+    function endHolding() {
+      if (holdTimer) {
+        clearInterval(holdTimer);
+        holdTimer = null;
+        holdProgress = 0;
+        setRingProgress(0);
+        instructionLabel.textContent = "Hold for 3s to Transmit";
+      }
+    }
+
+    if (mainBtn) {
+      mainBtn.addEventListener('mousedown', startHolding);
+      window.addEventListener('mouseup', endHolding);
+      mainBtn.addEventListener('touchstart', startHolding, { passive: false });
+      mainBtn.addEventListener('touchend', endHolding);
+      mainBtn.addEventListener('touchcancel', endHolding);
+    }
+
+    const copyBtn = document.getElementById('copy-telemetry-btn');
+    const copyText = document.getElementById('copy-btn-text');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const coords = "9.9312 N, 76.2673 E (Aluva Manappuram Bridge, Ernakulam)";
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(coords).catch(() => {});
+        }
+        copyText.textContent = "Copied!";
+        setTimeout(() => { copyText.textContent = "Copy GPS"; }, 2000);
+      });
+    }
+
+    const chips = document.querySelectorAll('.situation-chip');
+    chips.forEach(chip => {
+      const isSelected = chip.getAttribute('data-selected') === 'true';
+      updateChipStyle(chip, isSelected);
+
+      chip.addEventListener('click', () => {
+        const current = chip.getAttribute('data-selected') === 'true';
+        chip.setAttribute('data-selected', !current);
+        updateChipStyle(chip, !current);
+      });
+    });
+
+    function updateChipStyle(chip, selected) {
+      if (selected) {
+        chip.classList.remove('bg-surface-container', 'text-on-surface');
+        chip.classList.add('bg-secondary-container', 'text-on-secondary-container', 'font-bold');
+      } else {
+        chip.classList.remove('bg-secondary-container', 'text-on-secondary-container', 'font-bold');
+        chip.classList.add('bg-surface-container', 'text-on-surface');
+      }
+    }
+
+    let strandedCount = 4;
+    const countDisplay = document.getElementById('stranded-count-display');
+    const decBtn = document.getElementById('decrement-count');
+    const incBtn = document.getElementById('increment-count');
+
+    if (decBtn && incBtn && countDisplay) {
+      decBtn.addEventListener('click', () => {
+        if (strandedCount > 1) {
+          strandedCount--;
+          countDisplay.textContent = strandedCount;
+        }
+      });
+      incBtn.addEventListener('click', () => {
+        if (strandedCount < 99) {
+          strandedCount++;
+          countDisplay.textContent = strandedCount;
+        }
+      });
+    }
+
+    let sirenActive = false;
+    let audioContext = null;
+    let oscillator = null;
+    const sirenBtn = document.getElementById('toggle-siren-btn');
+    const sirenBox = document.getElementById('siren-icon-box');
+
+    if (sirenBtn && sirenBox) {
+      sirenBtn.addEventListener('click', () => {
+        sirenActive = !sirenActive;
+        if (sirenActive) {
+          sirenBtn.textContent = "ACTIVE";
+          sirenBtn.classList.remove('bg-surface-container', 'text-on-surface');
+          sirenBtn.classList.add('bg-secondary', 'text-on-secondary');
+          sirenBox.classList.add('bg-secondary-container', 'text-on-secondary-container', 'animate-pulse');
+          playSirenSound();
+        } else {
+          sirenBtn.textContent = "OFF";
+          sirenBtn.classList.remove('bg-secondary', 'text-on-secondary');
+          sirenBtn.classList.add('bg-surface-container', 'text-on-surface');
+          sirenBox.classList.remove('bg-secondary-container', 'text-on-secondary-container', 'animate-pulse');
+          stopSirenSound();
+        }
+      });
+    }
+
+    function playSirenSound() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        audioContext = new AudioCtx();
+        oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.type = 'sawtooth';
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(1400, audioContext.currentTime + 0.4);
+
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        oscillator.start();
+      } catch (err) {}
+    }
+
+    function stopSirenSound() {
+      if (oscillator) {
+        try {
+          oscillator.stop();
+          oscillator.disconnect();
+        } catch (e) {}
+        oscillator = null;
+      }
+      if (audioContext) {
+        try { audioContext.close(); } catch (e) {}
+        audioContext = null;
+      }
+    }
+
+    const dispatchBtn = document.getElementById('instant-dispatch-btn');
+    const smsBtn = document.getElementById('sms-fallback-btn');
+
+    if (dispatchBtn) {
+      dispatchBtn.addEventListener('click', () => triggerSOSDispatch('live'));
+    }
+    if (smsBtn) {
+      smsBtn.addEventListener('click', () => triggerSOSDispatch('sms'));
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast-notification');
+      const toastMsg = document.getElementById('toast-message');
+      if (toast && toastMsg) {
+        toastMsg.textContent = message;
+        toast.classList.remove('translate-y-24', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+        setTimeout(() => {
+          toast.classList.remove('translate-y-0', 'opacity-100');
+          toast.classList.add('translate-y-24', 'opacity-0');
+        }, 3200);
+      }
+    }
+  })();
+</script><div class="mt-space-lg mb-space-md py-space-sm px-space-md bg-surface-container rounded-lg text-center"><p class="font-label-sm text-label-sm text-on-surface-variant font-medium">⚠️ RESQ KERALA Hackathon Prototype · Not an official govt emergency dispatcher</p></div></main></body></html>

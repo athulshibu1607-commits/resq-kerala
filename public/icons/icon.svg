@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A192F" />
+      <stop offset="100%" stop-color="#050C17" />
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444" />
+      <stop offset="100%" stop-color="#BB0112" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22C55E" />
+      <stop offset="100%" stop-color="#16A34A" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded squircle -->
+  <rect width="512" height="512" rx="128" fill="url(#navyGrad)" />
+  <rect x="8" y="8" width="496" height="496" rx="120" fill="none" stroke="#172A45" stroke-width="4" />
+
+  <!-- Lifebuoy / Emergency Beacon Rings -->
+  <circle cx="256" cy="220" r="130" fill="none" stroke="url(#redGrad)" stroke-width="28" />
+  <circle cx="256" cy="220" r="80" fill="#0A192F" stroke="#FFFFFF" stroke-width="8" opacity="0.9" />
+
+  <!-- Emergency Cross / Beacon Radii -->
+  <rect x="242" y="60" width="28" height="56" rx="8" fill="#FFFFFF" />
+  <rect x="242" y="324" width="28" height="56" rx="8" fill="#FFFFFF" />
+  <rect x="96" y="206" width="56" height="28" rx="8" fill="#FFFFFF" />
+  <rect x="360" y="206" width="56" height="28" rx="8" fill="#FFFFFF" />
+
+  <!-- Central Rescue Wave Crest -->
+  <path d="M190 230 C220 180, 250 250, 280 200 C300 170, 320 220, 330 240 C310 250, 270 240, 250 260 C230 270, 200 250, 190 230 Z" fill="#7FFC97" />
+
+  <!-- Text Badge -->
+  <rect x="96" y="396" width="320" height="64" rx="20" fill="#BB0112" />
+  <text x="256" y="440" font-family="-apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', sans-serif" font-size="34" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">RESQ KERALA</text>
+  
+  <!-- Malayalam Subtitle -->
+  <text x="256" y="482" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="700" fill="#76849F" text-anchor="middle">കേരള ഡിസാസ്റ്റർ നെറ്റ്വർക്ക്</text>
+</svg>

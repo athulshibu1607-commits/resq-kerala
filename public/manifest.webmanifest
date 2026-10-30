@@ -1,0 +1,66 @@
+{
+  "name": "RESQ KERALA",
+  "short_name": "RESQ KERALA",
+  "description": "Life-critical civic disaster response, satellite emergency dispatch, and relief camp coordination for Kerala.",
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "window-controls-overlay", "minimal-ui"],
+  "background_color": "#060D17",
+  "theme_color": "#0A192F",
+  "orientation": "portrait-primary",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["emergency", "government", "utilities"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "1-Tap Emergency SOS",
+      "short_name": "SOS Dispatch",
+      "description": "Trigger instant priority GPS rescue dispatch",
+      "url": "/citizen/sos",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Find Safe Shelters",
+      "short_name": "Relief Camps",
+      "description": "Locate nearest verified relief camps and available beds",
+      "url": "/citizen/shelters",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Live Hazard Map",
+      "short_name": "Hazard Map",
+      "description": "Inspect flood plain surge and landslide risk zones",
+      "url": "/map",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
