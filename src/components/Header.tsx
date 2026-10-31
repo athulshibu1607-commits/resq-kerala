@@ -107,7 +107,7 @@ export default function Header() {
           <Link
             href="/citizen"
             className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-              pathname.startsWith('/citizen') && pathname !== '/citizen/sos'
+              pathname?.startsWith('/citizen') && pathname !== '/citizen/sos'
                 ? 'bg-surface-container dark:bg-command-card text-secondary dark:text-secondary-fixed font-bold'
                 : 'text-on-surface-variant dark:text-command-subtle hover:text-on-surface dark:hover:text-white'
             }`}
@@ -127,7 +127,7 @@ export default function Header() {
           <Link
             href="/volunteer"
             className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-              pathname.startsWith('/volunteer')
+              pathname?.startsWith('/volunteer')
                 ? 'bg-surface-container dark:bg-command-card text-secondary dark:text-secondary-fixed font-bold'
                 : 'text-on-surface-variant dark:text-command-subtle hover:text-on-surface dark:hover:text-white'
             }`}
@@ -137,7 +137,7 @@ export default function Header() {
           <Link
             href="/admin"
             className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-              pathname.startsWith('/admin')
+              pathname?.startsWith('/admin')
                 ? 'bg-primary-container text-white font-bold shadow-xs'
                 : 'text-on-surface-variant dark:text-command-subtle hover:text-on-surface dark:hover:text-white'
             }`}

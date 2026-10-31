@@ -110,13 +110,51 @@ supabase db push
 ```
 Or paste `supabase/migrations/20261030000000_resq_kerala_schema.sql` into the Supabase Web SQL Editor.
 
-### 5. Run Development Server
+### 5. Run Development Server (Local Only)
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) on your MacBook.
 
-### 6. Production Build
+### 6. Run for Same Wi-Fi Network Testing (Phone + MacBook)
+To open the website and dedicated download portal on your Android phone connected to the same Wi-Fi:
+```bash
+npm run dev:network
+# Or for production server:
+npm run start:network
+```
+This tells Next.js to listen on `0.0.0.0:3000`.
+
+#### Finding your MacBook's LAN IPv4 Address:
+Run in your terminal:
+```bash
+ipconfig getifaddr en0
+```
+*(Example output: `10.142.16.56` or `192.168.1.25`)*
+
+#### Opening on your Android Phone:
+Enter in Chrome on your phone:
+```
+http://<your-mac-lan-ip>:3000/download
+# Example: http://10.142.16.56:3000/download
+```
+
+> **Wi-Fi Troubleshooting Tips**:
+> 1. **Mac Firewall**: Go to macOS System Settings ➔ Network ➔ Firewall ➔ ensure Node.js is allowed to accept incoming connections.
+> 2. **Guest Network / Client Isolation**: Some office or public Wi-Fi networks block device-to-device traffic. Connect both MacBook and phone to the same private home Wi-Fi or phone hotspot.
+> 3. **HTTP Warning**: Android Chrome may show an "Insecure connection" warning for local HTTP LAN addresses. This is normal during local development testing. Tap **Advanced ➔ Proceed to site**.
+
+### 7. Dedicated App Download Page (`/download`)
+The dedicated download website is accessible at:
+* Local: `http://localhost:3000/download`
+* LAN Wi-Fi: `http://<your-mac-lan-ip>:3000/download`
+* Features:
+  - **Download Android App (APK)**: Prominent 1-tap download serving verified `resq-kerala-v1.0.0.apk` (3.3 MB).
+  - **Dynamic QR Code**: Pre-rendered, reachable QR code pointing to the `/download` page on your local Wi-Fi network or production portal.
+  - **4-Step Android Installation Guide**: Step-by-step instructions for sideloading and granting location permissions.
+  - **Zero-Blank Guarantee**: Backed by App Router error boundaries and server-side fallbacks.
+
+### 8. Production Build
 ```bash
 npm run build
 npm run start

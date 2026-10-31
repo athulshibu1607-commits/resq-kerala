@@ -144,10 +144,10 @@ export default function SettingsPage() {
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/install"
+              href="/download"
               className="px-4 py-2.5 bg-primary-container text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs"
             >
-              <span>Installation Instructions &amp; QR</span>
+              <span>Download Android App &amp; QR</span>
             </Link>
             <button
               onClick={() => {

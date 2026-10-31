@@ -19,6 +19,11 @@ export interface AppReleaseMetadata {
   publicDownloadUrl: string;
   publicReleasePageUrl: string;
   publicRepoUrl: string;
+  lanIp?: string;
+  port?: string;
+  localNetworkDownloadUrl?: string;
+  localNetworkApkUrl?: string;
+  productionDownloadUrl?: string;
 }
 
 export const CURRENT_APP_RELEASE: AppReleaseMetadata = {

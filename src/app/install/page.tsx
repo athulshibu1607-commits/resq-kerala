@@ -122,7 +122,7 @@ export default function InstallPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-28">
       {/* Top Breadcrumb / Navigation */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 text-xs font-bold text-on-surface-variant dark:text-command-subtle hover:text-secondary dark:hover:text-white transition-colors"
@@ -131,12 +131,16 @@ export default function InstallPage() {
           <span>Back to Home</span>
         </Link>
         <div className="flex items-center gap-2">
+          <Link
+            href="/download"
+            className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl bg-secondary text-white hover:bg-red-700 transition-colors shadow-xs"
+          >
+            <span className="material-symbols-outlined text-[16px]">download</span>
+            <span>Dedicated Download Page</span>
+          </Link>
           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-[11px] font-mono font-bold">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>APK v{release.version} Ready</span>
-          </span>
-          <span className="text-[11px] font-mono text-on-surface-variant/70 dark:text-command-subtle/70 hidden sm:inline">
-            App ID: {release.appId}
           </span>
         </div>
       </div>

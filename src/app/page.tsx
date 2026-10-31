@@ -413,11 +413,11 @@ export default function HomePage() {
               <div className="flex flex-wrap items-center gap-3 mt-5">
                 <InstallAppButton variant="secondary" className="py-3 px-5 text-xs font-bold" />
                 <Link
-                  href="/install"
+                  href="/download"
                   className="px-4 py-2.5 rounded-xl bg-surface-container dark:bg-command-navy hover:bg-surface-container-high text-on-surface dark:text-white text-xs font-bold border border-surface-container-high dark:border-command-border transition-colors flex items-center gap-1.5"
                 >
                   <span className="material-symbols-outlined text-[16px]">qr_code_2</span>
-                  <span>View Installation Guide &amp; QR</span>
+                  <span>Dedicated Download Page &amp; QR</span>
                 </Link>
               </div>
             </div>

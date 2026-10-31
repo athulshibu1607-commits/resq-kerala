@@ -7,6 +7,7 @@ const CACHE_NAME = 'resq-kerala-shell-v2';
 
 const CRITICAL_PWA_ASSETS = [
   '/',
+  '/download',
   '/install',
   '/offline.html',
   '/citizen',

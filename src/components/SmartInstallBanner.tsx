@@ -28,8 +28,9 @@ export default function SmartInstallBanner() {
       return;
     }
 
-    // Do not show on auth pages, install page, or active emergency SOS dispatch
+    // Do not show on auth pages, download page, install page, or active emergency SOS dispatch
     const forbiddenRoutes = [
+      '/download',
       '/install',
       '/login',
       '/register',

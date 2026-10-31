@@ -68,16 +68,16 @@ export default function InstallAppButton({
       return;
     }
 
-    const isOnInstallPage = pathname === '/install';
+    const isOnDownloadPage = pathname === '/download' || pathname === '/install';
 
-    if (isOnInstallPage) {
-      const targetId = isIOS ? 'ios-instructions' : 'device-instructions';
-      const el = document.getElementById(targetId) || document.getElementById('device-instructions');
+    if (isOnDownloadPage) {
+      const targetId = isIOS ? 'ios-instructions' : 'download-apk-card';
+      const el = document.getElementById(targetId) || document.getElementById('device-instructions') || document.getElementById('download-apk-card');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     } else {
-      router.push(isIOS ? '/install?platform=ios' : '/install');
+      router.push('/download');
     }
   };
 
@@ -98,15 +98,15 @@ export default function InstallAppButton({
     minimal: 'text-secondary dark:text-secondary-fixed hover:underline text-xs p-1',
   };
 
-  const isOnInstallPage = pathname === '/install';
+  const isOnDownloadPage = pathname === '/download' || pathname === '/install';
 
   const buttonLabel = deferredPrompt
     ? 'Install App Now'
     : isIOS
     ? 'Add to Home Screen (Guide)'
-    : isOnInstallPage
-    ? 'View Installation Steps'
-    : 'Install App';
+    : isOnDownloadPage
+    ? 'View Download Options'
+    : 'Download App';
 
   return (
     <div className="inline-flex items-center gap-2">
@@ -114,7 +114,7 @@ export default function InstallAppButton({
         type="button"
         onClick={handleInstallClick}
         className={`${baseStyles} ${variants[variant]} ${className}`}
-        title="Install RESQ KERALA to Home Screen"
+        title="Download or Install RESQ KERALA"
       >
         <span className="material-symbols-outlined text-[18px]">
           {isIOS ? 'ios_share' : 'install_mobile'}
@@ -122,12 +122,12 @@ export default function InstallAppButton({
         <span>{buttonLabel}</span>
       </button>
 
-      {showInstructionsLink && !deferredPrompt && !isOnInstallPage && (
+      {showInstructionsLink && !deferredPrompt && !isOnDownloadPage && (
         <Link
-          href="/install"
+          href="/download"
           className="text-xs text-on-surface-variant dark:text-command-subtle hover:text-secondary dark:hover:text-white underline"
         >
-          How to install
+          Download APK
         </Link>
       )}
     </div>

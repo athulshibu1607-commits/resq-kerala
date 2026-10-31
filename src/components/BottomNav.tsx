@@ -57,7 +57,7 @@ export default function BottomNav() {
         <Link
           href="/citizen/shelters"
           className={`flex flex-col items-center justify-center min-w-[54px] min-h-[48px] transition-colors ${
-            pathname.startsWith('/citizen/shelters')
+            pathname?.startsWith('/citizen/shelters')
               ? 'text-secondary dark:text-secondary-fixed font-bold'
               : 'text-on-surface-variant dark:text-command-subtle'
           }`}
@@ -70,7 +70,7 @@ export default function BottomNav() {
         <Link
           href="/citizen/contacts"
           className={`flex flex-col items-center justify-center min-w-[54px] min-h-[48px] transition-colors ${
-            pathname.startsWith('/citizen/contacts')
+            pathname?.startsWith('/citizen/contacts')
               ? 'text-secondary dark:text-secondary-fixed font-bold'
               : 'text-on-surface-variant dark:text-command-subtle'
           }`}
