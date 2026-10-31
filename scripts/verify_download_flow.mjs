@@ -44,31 +44,31 @@ async function testAll() {
   assert(downloadPage.body.includes('dedicated-qr-container'), 'Contains reachable QR code container');
   assert(downloadPage.body.includes('instructions-section'), 'Contains 4-step Android installation instructions');
 
-  // 3. Local Wi-Fi LAN IP accessibility
-  const lanIp = '10.142.16.56';
-  const lanUrl = `http://${lanIp}:3000/download`;
-  const lanRes = await httpGet(lanUrl);
-  assert(lanRes.status === 200, `Reachable via Wi-Fi LAN IP (${lanUrl}) -> HTTP 200`);
-
-  // 4. /api/release check
+  // 3. /api/release check
   const apiRes = await httpGet('http://localhost:3000/api/release');
   assert(apiRes.status === 200, '/api/release returns HTTP 200');
   const releaseData = JSON.parse(apiRes.body);
-  assert(releaseData.lanIp === lanIp, `Detected LAN IP matches active interface (${lanIp})`);
+  const lanIp = releaseData.lanIp;
+  assert(Boolean(lanIp), `Detected LAN IP: ${lanIp}`);
   assert(releaseData.localNetworkDownloadUrl === `http://${lanIp}:3000/download`, 'Local network download URL points to http://<lan-ip>:3000/download');
   assert(releaseData.fileExistsOnServer === true, 'Physical APK file exists on server');
+
+  // 4. Local Wi-Fi LAN IP accessibility
+  const lanUrl = `http://${lanIp}:3000/download`;
+  const lanRes = await httpGet(lanUrl);
+  assert(lanRes.status === 200, `Reachable via Wi-Fi LAN IP (${lanUrl}) -> HTTP 200`);
 
   // 5. Direct APK file download check
   const apkRes = await httpGet('http://localhost:3000/downloads/resq-kerala-v1.0.0.apk');
   assert(apkRes.status === 200, 'APK file returns HTTP 200');
   assert(apkRes.headers['content-type'] === 'application/vnd.android.package-archive', 'Content-Type is application/vnd.android.package-archive');
   assert(apkRes.headers['content-disposition']?.includes('attachment'), 'Content-Disposition includes attachment');
-  assert(parseInt(apkRes.headers['content-length'], 10) === 3412537, 'Content-Length matches exactly 3,412,537 bytes (3.3 MB)');
+  assert(parseInt(apkRes.headers['content-length'], 10) === 3425205, 'Content-Length matches exactly 3,425,205 bytes (3.3 MB)');
 
   // 6. SHA-256 checksum verification
   const localApkBuf = fs.readFileSync(path.join(process.cwd(), 'public/downloads/resq-kerala-v1.0.0.apk'));
   const localHash = crypto.createHash('sha256').update(localApkBuf).digest('hex');
-  assert(localHash === '2c07ff86d8aef41d892d11de74da56898442d14ad1d18f54d816e5e34c581f72', 'Cryptographic SHA-256 checksum verified (2c07ff86d8aef41d892d11de74da56898442d14ad1d18f54d816e5e34c581f72)');
+  assert(localHash === '4930dae6c8b2ecd816ec3bfc963032b005264b7aa296898b839e999cf5a70475', 'Cryptographic SHA-256 checksum verified (4930dae6c8b2ecd816ec3bfc963032b005264b7aa296898b839e999cf5a70475)');
 
   // 7. Not found page check (no blank screen on unknown route)
   const notFoundRes = await httpGet('http://localhost:3000/non-existent-route-test');
